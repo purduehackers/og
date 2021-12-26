@@ -30,7 +30,6 @@ function getCss(theme: string, fontSize: string) {
 
   if (theme === "dark") {
     background = "black";
-    foreground = "#f59e0b";
     radial = "dimgray";
   }
   return `

@@ -1,5 +1,18 @@
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: normal;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2)  format("woff2");
+}
+@font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: bold;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYX9KVElMYYaJe8bpLHnCwDKjWr7AIFsdP3pBms.woff2)  format("woff2");
+}
+
 body {
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+  font-family: "IBM Plex Sans", "SF Pro Icons", "Helvetica Neue", "Helvetica",
     "Arial", sans-serif;
   margin: 20px;
   overflow-x: hidden;
@@ -9,14 +22,19 @@ body {
 
 a {
     cursor: pointer;
-    color: #0076FF;
+    color: #f59e0b;
     text-decoration: none;
     transition: all 0.2s ease;
     border-bottom: 1px solid white;
 }
 
+h1 {
+    color: #f59e0b;
+    font-size: 48px;
+}
+
 a:hover {
-    border-bottom: 1px solid #0076FF;
+    border-bottom: 1px solid #f59e0b;
 }
 
 footer {
