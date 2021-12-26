@@ -138,7 +138,7 @@ function getCss(theme: string, fontSize: string) {
         margin: 0 50px;
       }
       .heading {
-        background-image: linear-gradient(to bottom right, #fbbf24, #d97706 66%);
+        background-image: linear-gradient(to bottom right, #fbbf24, #f59e0b 66%);
         background-repeat: no-repeat;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
