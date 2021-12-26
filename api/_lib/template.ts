@@ -112,12 +112,37 @@ function getCss(theme: string, fontSize: string) {
         margin: 150px;
     }
 
+    .brand {
+        font-size: 105px;
+        padding: 50px;
+        text-align: center;
+        font-weight: bold;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        color: ${foreground};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo {
+        width: 125px;
+        margin: 0 50px;
+    }
+
     .emoji {
         height: 1em;
         width: 1em;
         margin: 0 .05em 0 .1em;
         vertical-align: -0.1em;
     }
+
+    .caption {
+        font-size: ${Number(sanitizeHtml(fontSize).match(/\d+/)) * 0.375}px;
+        text-transform: uppercase;
+        color: #7a8c97;
+        letter-spacing: 0;
+      }
     
     .heading {
         font-family: 'IBM Plex Sans', sans-serif;
@@ -129,7 +154,8 @@ function getCss(theme: string, fontSize: string) {
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-  const { text, theme, md, fontSize, images, widths, heights } = parsedReq;
+  const { text, theme, md, fontSize, images, widths, heights, caption } =
+    parsedReq;
   return `<!DOCTYPE html>
 <html>
     <meta charset="utf-8">
@@ -140,6 +166,10 @@ export function getHtml(parsedReq: ParsedRequest) {
     </style>
     <body>
         <div>
+        <div class="brand">
+            <img class="logo" src="https://assets.hackclub.com/icon-rounded.svg">
+            Purdue Hackers
+        </div>
             <div class="spacer">
             <div class="logo-wrapper">
                 ${images
@@ -154,6 +184,11 @@ export function getHtml(parsedReq: ParsedRequest) {
               md ? marked(text) : sanitizeHtml(text)
             )}
             </div>
+            ${
+              caption && caption !== "undefined"
+                ? `<div class="caption">${emojify(sanitizeHtml(caption))}</div>`
+                : ""
+            }
         </div>
     </body>
 </html>`;
