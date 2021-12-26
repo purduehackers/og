@@ -143,7 +143,7 @@ function getCss(theme: string, fontSize: string) {
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0 50px;
-        padding-bottom: 45px;
+        padding-bottom: 50px;
         line-height: 0.875;
         font-weight: bold;
       }
@@ -155,7 +155,6 @@ function getCss(theme: string, fontSize: string) {
         text-transform: uppercase;
         color: #7a8c97;
         letter-spacing: 0;
-        margin-top: 50px;
       }
       .emoji {
         height: 1em;
