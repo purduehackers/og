@@ -137,7 +137,7 @@ const fileTypeOptions: DropdownOption[] = [
   { text: "JPEG", value: "jpeg" },
 ];
 
-const fontSizeOptions: DropdownOption[] = Array.from({ length: 10 })
+const fontSizeOptions: DropdownOption[] = Array.from({ length: 12 })
   .map((_, i) => i * 25)
   .filter((n) => n > 0)
   .map((n) => ({ text: n + "px", value: n + "px" }));
@@ -147,71 +147,10 @@ const markdownOptions: DropdownOption[] = [
   { text: "Markdown", value: "1" },
 ];
 
-const imageLightOptions: DropdownOption[] = [
-  {
-    text: "Vercel",
-    value:
-      "https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg",
-  },
-  {
-    text: "Next.js",
-    value:
-      "https://assets.vercel.com/image/upload/front/assets/design/nextjs-black-logo.svg",
-  },
-  {
-    text: "Hyper",
-    value:
-      "https://assets.vercel.com/image/upload/front/assets/design/hyper-color-logo.svg",
-  },
-];
-
-const imageDarkOptions: DropdownOption[] = [
-  {
-    text: "Vercel",
-    value:
-      "https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg",
-  },
-  {
-    text: "Next.js",
-    value:
-      "https://assets.vercel.com/image/upload/front/assets/design/nextjs-white-logo.svg",
-  },
-  {
-    text: "Hyper",
-    value:
-      "https://assets.vercel.com/image/upload/front/assets/design/hyper-bw-logo.svg",
-  },
-];
-
-const widthOptions = [
-  { text: "width", value: "auto" },
-  { text: "50", value: "50" },
-  { text: "100", value: "100" },
-  { text: "150", value: "150" },
-  { text: "200", value: "200" },
-  { text: "250", value: "250" },
-  { text: "300", value: "300" },
-  { text: "350", value: "350" },
-];
-
-const heightOptions = [
-  { text: "height", value: "auto" },
-  { text: "50", value: "50" },
-  { text: "100", value: "100" },
-  { text: "150", value: "150" },
-  { text: "200", value: "200" },
-  { text: "250", value: "250" },
-  { text: "300", value: "300" },
-  { text: "350", value: "350" },
-];
-
 interface AppState extends ParsedRequest {
   loading: boolean;
   showToast: boolean;
   messageToast: string;
-  selectedImageIndex: number;
-  widths: string[];
-  heights: string[];
   overrideUrl: URL | null;
 }
 
@@ -231,34 +170,26 @@ const App = (_: any, state: AppState, setState: SetState) => {
   };
   const {
     fileType = "png",
-    fontSize = "100px",
+    fontSize = "250px",
     theme = "light",
     md = true,
-    text = "**Hello** World",
-    images = [imageLightOptions[0].value],
-    widths = [],
-    heights = [],
+    text = "Personal Website",
+    caption = "By Hack Club Staff",
+    images = [],
     showToast = false,
     messageToast = "",
     loading = true,
-    selectedImageIndex = 0,
     overrideUrl = null,
   } = state;
   const mdValue = md ? "1" : "0";
-  const imageOptions = theme === "light" ? imageLightOptions : imageDarkOptions;
   const url = new URL(window.location.origin);
   url.pathname = `${encodeURIComponent(text)}.${fileType}`;
   url.searchParams.append("theme", theme);
   url.searchParams.append("md", mdValue);
   url.searchParams.append("fontSize", fontSize);
+  url.searchParams.append("caption", encodeURIComponent(caption));
   for (let image of images) {
     url.searchParams.append("images", image);
-  }
-  for (let width of widths) {
-    url.searchParams.append("widths", width);
-  }
-  for (let height of heights) {
-    url.searchParams.append("heights", height);
   }
 
   return H(
@@ -274,13 +205,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
           input: H(Dropdown, {
             options: themeOptions,
             value: theme,
-            onchange: (val: Theme) => {
-              const options =
-                val === "light" ? imageLightOptions : imageDarkOptions;
-              let clone = [...images];
-              clone[0] = options[selectedImageIndex].value;
-              setLoadingState({ theme: val, images: clone });
-            },
+            onchange: (val: Theme) => setLoadingState({ theme: val }),
           }),
         }),
         H(Field, {
@@ -314,6 +239,16 @@ const App = (_: any, state: AppState, setState: SetState) => {
             oninput: (val: string) => {
               console.log("oninput " + val);
               setLoadingState({ text: val, overrideUrl: url });
+            },
+          }),
+        }),
+        H(Field, {
+          label: "Caption Input",
+          input: H(TextInput, {
+            value: caption,
+            oninput: (val: string) => {
+              console.log("oninput " + val);
+              setLoadingState({ caption: val, overrideUrl: url });
             },
           }),
         }),
