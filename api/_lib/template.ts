@@ -70,49 +70,53 @@ function getCss(theme: string, fontSize: string) {
 
     body {
         background: ${background};
-        background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
+        background-image: radial-gradient(circle at 25px 25px, ${radial} 3%, transparent 0%),
+          radial-gradient(circle at 75px 75px, ${radial} 3%, transparent 0%);
         background-size: 100px 100px;
+        color: ${foreground};
         height: 100vh;
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
-    }
-
-    code {
-        color: #D400FF;
-        font-family: 'Vera';
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: ${sanitizeHtml(fontSize)};
+        font-style: normal;
+      }
+      code {
+        font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif;
+        font-size: .875em;
         white-space: pre-wrap;
-        letter-spacing: -5px;
-    }
-
-    code:before, code:after {
+      }
+      code:before,
+      code:after {
         content: '\`';
-    }
-
-    .logo-wrapper {
+      }
+      .img-wrapper {
+        margin: 50px 0 50px;
+        padding-top: 75px;
         display: flex;
         align-items: center;
         align-content: center;
         justify-content: center;
-        justify-items: center;
-    }
-
-    .logo {
-        margin: 0 75px;
-    }
-
-    .plus {
-        color: #BBB;
-        font-family: Times New Roman, Verdana;
-        font-size: 100px;
-    }
-
-    .spacer {
-        margin: 150px;
-    }
-
-    .brand {
+      }
+      .img {
+        width: 200px;
+        height: 200px;
+      }
+      .plus {
+        color: #7a8c97;
+        font-size: 75px;
+        padding: 0 30px;
+      }
+      .container {
+        margin: 100px 150px 150px;
+      }
+      .spacer {
+        margin: 50px 0;
+        width: 100%;
+      }
+      .brand {
         font-size: 105px;
         padding: 50px;
         text-align: center;
@@ -124,86 +128,84 @@ function getCss(theme: string, fontSize: string) {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-    .logo {
+      }
+      .brand span {
+        color: #7a8c97;
+        font-weight: normal;
+        margin-right: 0.2em;
+      }
+      .logo {
         width: 125px;
         margin: 0 50px;
-    }
-
-    .emoji {
-        height: 1em;
-        width: 1em;
-        margin: 0 .05em 0 .1em;
-        vertical-align: -0.1em;
-    }
-
-    .caption {
+      }
+      .heading {
+        background-image: linear-gradient(to bottom right, #ff8c37, #ec3750 66%);
+        background-repeat: no-repeat;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0 50px;
+        padding-bottom: 25px;
+        line-height: 0.875;
+        font-weight: bold;
+      }
+      .heading * {
+        margin: 0;
+      }
+      .caption {
         font-size: ${Number(sanitizeHtml(fontSize).match(/\d+/)) * 0.375}px;
         text-transform: uppercase;
         color: #7a8c97;
         letter-spacing: 0;
       }
-    
-    .heading {
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-size: ${sanitizeHtml(fontSize)};
-        font-style: normal;
-        color: ${foreground};
-        line-height: 1.8;
-    }`;
+      .emoji {
+        height: 1em;
+        width: 1em;
+        margin: 0 .05em 0 .1em;
+        vertical-align: -0.1em;
+      }`;
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
   const { text, theme, md, fontSize, images, widths, heights, caption } =
     parsedReq;
   return `<!DOCTYPE html>
-<html>
-    <meta charset="utf-8">
-    <title>Generated Image</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        ${getCss(theme, fontSize)}
-    </style>
-    <body>
-        <div>
-        <div class="brand">
-            <img class="logo" src="https://assets.hackclub.com/icon-rounded.svg">
-            Purdue Hackers
-        </div>
-            <div class="spacer">
-            <div class="logo-wrapper">
-                ${images
-                  .map(
-                    (img, i) =>
-                      getPlusSign(i) + getImage(img, widths[i], heights[i])
-                  )
-                  .join("")}
-            </div>
-            <div class="spacer">
-            <div class="heading">${emojify(
-              md ? marked(text) : sanitizeHtml(text)
-            )}
-            </div>
-            ${
-              caption && caption !== "undefined"
-                ? `<div class="caption">${emojify(sanitizeHtml(caption))}</div>`
-                : ""
-            }
-        </div>
-    </body>
+  <html>
+  <meta charset="utf-8">
+  <title>Generated Image</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    ${getCss(theme, fontSize)}
+  </style>
+  <body>
+    <div class="brand">
+      <img class="logo" src="https://raw.githubusercontent.com/PurdueHackers/PH-Website-Frontend/master/src/assets/images/logo_square.png">
+      Purdue Hackers
+    </div>
+    <div class="container">
+      ${
+        images.length > 0
+          ? `<div class="img-wrapper">
+              <img class="img" src="${sanitizeHtml(images[0])}" />
+              ${images
+                .slice(1)
+                .map(
+                  (img) =>
+                    `<div class="plus">+</div>
+                <img class="img" src="${sanitizeHtml(img)}" />`
+                )
+                .join("")}
+            </div>`
+          : '<div class="spacer"></div>'
+      }
+      <div class="heading">${emojify(
+        md ? marked(text) : sanitizeHtml(text)
+      )}</div>
+      ${
+        caption && caption !== "undefined"
+          ? `<div class="caption">${emojify(sanitizeHtml(caption))}</div>`
+          : ""
+      }
+    </div>
+  </body>
 </html>`;
-}
-
-function getImage(src: string, width = "auto", height = "225") {
-  return `<img
-        class="logo"
-        alt="Generated Image"
-        src="${sanitizeHtml(src)}"
-        width="${sanitizeHtml(width)}"
-        height="${sanitizeHtml(height)}"
-    />`;
-}
-
-function getPlusSign(i: number) {
-  return i === 0 ? "" : '<div class="plus">+</div>';
 }
