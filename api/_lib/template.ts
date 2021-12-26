@@ -25,12 +25,12 @@ const ibmBold = readFileSync(
 
 function getCss(theme: string, fontSize: string) {
   let background = "white";
-  let foreground = "black";
+  let foreground = "#fbbf24";
   let radial = "lightgray";
 
   if (theme === "dark") {
     background = "black";
-    foreground = "white";
+    foreground = "#f59e0b";
     radial = "dimgray";
   }
   return `
