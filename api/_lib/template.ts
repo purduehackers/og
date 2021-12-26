@@ -155,7 +155,7 @@ function getCss(theme: string, fontSize: string) {
         text-transform: uppercase;
         color: #7a8c97;
         letter-spacing: 0;
-        margin-top: 25px;
+        margin-top: 50px;
       }
       .emoji {
         height: 1em;
