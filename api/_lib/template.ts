@@ -143,7 +143,7 @@ function getCss(theme: string, fontSize: string) {
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0 50px;
-        padding-bottom: 25px;
+        padding-bottom: 35px;
         line-height: 0.875;
         font-weight: bold;
       }
