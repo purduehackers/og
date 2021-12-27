@@ -55,16 +55,16 @@ function getCss(theme: string, fontSize: string) {
     }
 
     @font-face {
-        font-family: 'IBM Plex Sans';
-        font-style: normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${ibmRglr})  format("ttf");
+      font-family: 'IBM Plex Sans';
+      font-style: normal;
+      font-weight: normal;
+      src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2) format("woff2");
     }
     @font-face {
         font-family: 'IBM Plex Sans';
         font-style: normal;
         font-weight: bold;
-        src: url(data:font/woff2;charset=utf-8;base64,${ibmBold})  format("ttf");
+        src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYX9KVElMYYaJe8bpLHnCwDKjWr7AIFsdP3pBms.woff2) format("woff2");
     }
 
     body {
