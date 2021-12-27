@@ -17,10 +17,10 @@ const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
 );
 
 const ibmRglr = readFileSync(
-  `${__dirname}/../_fonts/IBMPlexSans-Regular.ttf`
+  `${__dirname}/../_fonts/IBMPlexSans-Regular.woff2`
 ).toString("base64");
 const ibmBold = readFileSync(
-  `${__dirname}/../_fonts/IBMPlexSans-Bold.ttf`
+  `${__dirname}/../_fonts/IBMPlexSans-Bold.woff2`
 ).toString("base64");
 
 function getCss(theme: string, fontSize: string) {
@@ -58,13 +58,13 @@ function getCss(theme: string, fontSize: string) {
       font-family: 'IBM Plex Sans';
       font-style: normal;
       font-weight: normal;
-      src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2) format("woff2");
+      src: url(data:font/woff2;charset=utf-8;base64,${ibmRglr}) format("woff2");
     }
     @font-face {
-        font-family: 'IBM Plex Sans';
-        font-style: normal;
-        font-weight: bold;
-        src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYX9KVElMYYaJe8bpLHnCwDKjWr7AIFsdP3pBms.woff2) format("woff2");
+      font-family: 'IBM Plex Sans';
+      font-style: normal;
+      font-weight: bold;
+      src: url(data:font/woff2;charset=utf-8;base64,${ibmBold}) format("woff2");
     }
 
     body {
