@@ -174,7 +174,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     theme = "light",
     md = true,
     text = "Sound Galaxy",
-    caption = "Nov 10th • 6:00-7:00PM • UNIV 003",
+    caption = "Nov 10 • UNIV 003",
     images = [],
     showToast = false,
     messageToast = "",
