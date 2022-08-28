@@ -145,7 +145,7 @@ export function getHtml(parsedReq: ParsedRequest) {
   </style>
   <body>
     <div class="brand">
-      <img class="logo" src="https://raw.githubusercontent.com/PurdueHackers/PH-Website-Frontend/master/src/assets/images/logo_square.png">
+      <img class="logo" src="https://raw.githubusercontent.com/purduehackers/og/main/public/ph-logo.png">
       Purdue Hackers
     </div>
     <div class="container">
