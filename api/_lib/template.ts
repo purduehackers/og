@@ -73,6 +73,7 @@ function getCss(theme: string, fontSize: string) {
         height: 200px;
       }
       .img[src*="//media.discordapp.net/"],
+      .img[src*="//cdn.discordapp.net/"],
       .img[src*="//dl.airtable.com/"],
       .img[src*="//github.com/"] {
         border-radius: 100px;
