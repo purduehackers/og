@@ -72,6 +72,13 @@ function getCss(theme: string, fontSize: string) {
         width: 200px;
         height: 200px;
       }
+      .img[src*="//media.discordapp.net/"],
+      .img[src*="//dl.airtable.com/"],
+      .img[src*="//github.com/"] {
+        border-radius: 100px;
+        width: 175px;
+        height: 175px;
+      }
       .plus {
         color: #7a8c97;
         font-size: 75px;
